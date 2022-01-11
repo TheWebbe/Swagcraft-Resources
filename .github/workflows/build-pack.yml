@@ -37,22 +37,28 @@ jobs:
       run: |
         cd release
         zip -r SwagTest-Resources.zip *
-        EXPORT RES_SHA = $(sha1sum SwagTest-Resources.zip)
-        EXPORT VER = $(cat version)
-        echo "::set-env name=RES_SHA::$RES_SHA"
-        echo "::set-env name=VER::$VER"
+        sha=($(sha1sum SwagTest-Resources.zip))
+        echo "resource_sha=$sha" >> $GITHUB_ENV
+        echo "resource_version=$(cat version)" >> $GITHUB_ENV
         ls -la
+    - name: Dump ENVIRONMENT context
+      env:
+        ENVIRONMENT: ${{ toJSON(env) }}
+      run: echo "$ENVIRONMENT"
     - name: Create Release
       id: create_release
       uses: actions/create-release@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+        RESOURCE_SHA: ${{ env.resource_sha }}
+        RESOURCE_VERSION: ${{ env.resource_version }}
+        
       with:
-        tag_name: ${{ VER }}
-        release_name: Release ${{ VER }}
+        tag_name: ${{ env.resource_version }}
+        release_name: Release ${{ env.resource_version }}
         body: |
-          - Version: ${{ VER }}
-          - resource-pack-sha1= ${{ RES_SHA }}
+          - Version: ${{ env.resource_version }}
+          - resource-pack-sha1=${{ env.resource_sha }}
           - resource-pack=https\://github.com/TheWebbe/Swagcraft-Resources/releases/download/refs%2Fheads%2Fmain/release.SwagTest-Resources.zip
         draft: false
         prerelease: false

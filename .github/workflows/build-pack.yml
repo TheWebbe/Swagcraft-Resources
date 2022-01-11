@@ -22,12 +22,8 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
-
-      # Runs a set of commands using the runners shell
-      - name: Build Pack
-        uses: actions/upload-artifact@v2
-        with: 
-          name: assets-for-download
-          path: $GITHUB_WORKSPACE
+    - uses: actions/checkout@v1
+    - name: Zip Folder
+      run: zip -r SwagTest-resources.zip .
+    - name: Release to Github
+      run: echo "Release"

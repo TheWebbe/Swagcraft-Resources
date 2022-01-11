@@ -51,7 +51,7 @@ jobs:
         tag_name: ${{ env.VER }}
         release_name: Release ${{ env.VER }}
         body: |
-          - Version: ${{ VER }}
+          - Version: ${{ env.VER }}
           - resource-pack-sha1= ${{ env.RES_SHA }}
           - resource-pack=https\://github.com/TheWebbe/Swagcraft-Resources/releases/download/refs%2Fheads%2Fmain/release.SwagTest-Resources.zip
         draft: false

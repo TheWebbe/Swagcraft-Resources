@@ -25,12 +25,8 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
-      # Runs a single command using the runners shell
-      - name: comments
-        run: generating zip file
-
       # Runs a set of commands using the runners shell
-      - name: Step 3 - Use the Upload Artifact GitHub Action
+      - name: Build Pack
         uses: actions/upload-artifact@v2
         with: 
           name: assets-for-download

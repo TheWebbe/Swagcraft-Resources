@@ -45,12 +45,15 @@ jobs:
       uses: actions/create-release@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+        RESOURCE_SHA: ${{ env.resource_sha }}
+        RESOURCE_VERSION: ${{ env.resource_version }}
+        
       with:
-        tag_name: ${{ env.version }}
-        release_name: Release ${{ env.version }}
+        tag_name: $RESOURCE_VERSION
+        release_name: Release $RESOURCE_VERSION
         body: |
-          - Version: ${{ env.version }}
-          - resource-pack-sha1= ${{ env.resource_sha }}
+          - Version: $RESOURCE_VERSION
+          - resource-pack-sha1=$RESOURCE_SHA
           - resource-pack=https\://github.com/TheWebbe/Swagcraft-Resources/releases/download/refs%2Fheads%2Fmain/release.SwagTest-Resources.zip
         draft: false
         prerelease: false

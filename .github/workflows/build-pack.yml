@@ -40,6 +40,10 @@ jobs:
         echo "resource_sha=$(sha1sum SwagTest-Resources.zip)"
         echo "resource_version=$(cat version)"
         ls -la
+    - name: Dump ENVIRONMENT context
+        env:
+          ENVIRONMENT: ${{ toJSON(env) }}
+        run: echo "$ENVIRONMENT"
     - name: Create Release
       id: create_release
       uses: actions/create-release@v1

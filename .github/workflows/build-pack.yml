@@ -28,7 +28,7 @@ jobs:
     - name: Switch to Release Folder
       run: |
         cd release
-        ls -la
+        ls -la        
     - uses: actions/upload-artifact@v2
       with:
         name: SwagTest-Resources
@@ -47,8 +47,10 @@ jobs:
           - Second Change
         draft: false
         prerelease: false
-    - name: List Files
+    - name: Create Release Zip
       run: |
+        cd release
+        zip -r SwagTest-Resources.zip *
         ls -la
     - name: Upload Release Asset
       id: upload-release-asset 

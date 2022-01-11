@@ -31,5 +31,5 @@ jobs:
         ls -la
     - uses: actions/upload-artifact@v2
       with:
-        name: my-artifact
-        path: .
+        name: SwagTest-Resources
+        path: ./release

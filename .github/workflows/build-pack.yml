@@ -53,11 +53,11 @@ jobs:
         RESOURCE_VERSION: ${{ env.resource_version }}
         
       with:
-        tag_name: $RESOURCE_VERSION
-        release_name: Release $RESOURCE_VERSION
+        tag_name: ${{ env.resource_version }}
+        release_name: Release ${{ env.resource_version }}
         body: |
-          - Version: $RESOURCE_VERSION
-          - resource-pack-sha1=$RESOURCE_SHA
+          - Version: ${{ env.resource_version }}
+          - resource-pack-sha1=${{ env.resource_sha }}
           - resource-pack=https\://github.com/TheWebbe/Swagcraft-Resources/releases/download/refs%2Fheads%2Fmain/release.SwagTest-Resources.zip
         draft: false
         prerelease: false

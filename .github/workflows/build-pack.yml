@@ -37,7 +37,8 @@ jobs:
       run: |
         cd release
         zip -r SwagTest-Resources.zip *
-        echo "resource_sha=$(sha1sum SwagTest-Resources.zip)" >> $GITHUB_ENV
+        sha=($(sha1sum SwagTest-Resources.zip))
+        echo "resource_sha=$sha" >> $GITHUB_ENV
         echo "resource_version=$(cat version)" >> $GITHUB_ENV
         ls -la
     - name: Dump ENVIRONMENT context
